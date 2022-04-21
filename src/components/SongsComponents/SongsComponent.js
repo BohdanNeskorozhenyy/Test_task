@@ -3,6 +3,7 @@ import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import { Box } from '@mui/system';
 import { styled } from '@mui/material/styles';
+import { Button } from '@mui/material';
 import './index.css'
 
 import Paper from '@mui/material/Paper';
@@ -13,13 +14,7 @@ import { useQuery } from 'react-query'
 
 
 
-const mockData = [
-   { collectionName: 'C' },
-   { collectionName: 'D' },
-   { collectionName: 'E' },
-   { collectionName: 'A' },
-   { collectionName: 'B' },
-]
+const mockData = ['A', 'B', 'C', 'D', 'E']
 
 
 function SongsComponent() {
@@ -52,19 +47,13 @@ function SongsComponent() {
 
    useEffect(() => {
       if (isSuccess) {
-         const { data } = requestResult;
+         const { results } = requestResult.data;
+         const AllCollections = results.map(song => song.collectionName)
+         const noRepeatCollections = [...new Set(AllCollections)]
          if (songs) {
-            setNewSongs(data.results.filter((song, i) => {
-               if (i <= 4) {
-                  return song
-               }
-            }))
+            setNewSongs(noRepeatCollections.filter((song, i) => i <= 4))
          } else {
-            setSongs(data.results.filter((song, i) => {
-               if (i <= 4) {
-                  return song
-               }
-            }))
+            setSongs(noRepeatCollections.filter((song, i) => i <= 4))
          }
       }
    }, [requestResult])
@@ -73,15 +62,15 @@ function SongsComponent() {
 
    return (
       <Container sx={containerStyles}>
-         <button onClick={() => getSongs()}>search</button>
          <Box sx={inputBoxStyle}>
-            <TextField onChange={(e) => inputHandler(e)} value={searchValue} sx={searchStyles} placeholder='Search Band' />
+            <TextField onChange={inputHandler} value={searchValue} sx={searchStyles} placeholder='Search Band' />
          </Box>
          <Box sx={boxStyles}>
             {songs.map((song, i) => (
-               <Item className={`song-item${i} song-item`} key={i}>{song?.collectionName}</Item>
+               <Item className={`song-item${i} song-item`} key={i}>{song}</Item>
             ))}
          </Box>
+         <Button variant='contained' onClick={() => getSongs()}>search</Button>
       </Container >
    );
 }
@@ -98,7 +87,8 @@ const Item = styled(Paper)(({ theme }) => ({
    color: '#ffffff',
    whiteSpace: 'nowrap',
    textOverflow: 'ellipsis',
-   overflow: 'hidden'
+   overflow: 'hidden',
+   boxShadow: 'rgb(38, 57, 77) 0px 20px 30px -10px;'
 }));
 
 

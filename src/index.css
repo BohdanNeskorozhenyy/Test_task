@@ -5,9 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #d9ed92;
+  background-size: cover;
+  background: linear-gradient(320deg, hsl(206deg 66% 34%) 0%, hsl(173deg 43% 47%) 11%, hsl(141deg 43% 62%) 25%, hsl(117deg 51% 67%) 42%, hsl(92deg 62% 72%) 61%, hsl(149deg 42% 48%) 81%, hsl(206deg 66% 28%) 100%) no-repeat center;
 }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
