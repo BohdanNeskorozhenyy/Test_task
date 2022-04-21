@@ -7,18 +7,18 @@ import './index.css'
 
 import Paper from '@mui/material/Paper';
 
-import { useArrayRotate } from '../../utils/arrayRotate';
+import { useArrayRotate } from '../../hooks/useArrayrotate';
 import { searchSongs } from '../../hooks/useSearch';
 import { useQuery } from 'react-query'
 
 
 
 const mockData = [
-   { collectionName: 'A' },
-   { collectionName: 'B' },
    { collectionName: 'C' },
    { collectionName: 'D' },
-   { collectionName: 'E' }
+   { collectionName: 'E' },
+   { collectionName: 'A' },
+   { collectionName: 'B' },
 ]
 
 
@@ -96,7 +96,9 @@ const Item = styled(Paper)(({ theme }) => ({
    margin: '15px 0px',
    textAlign: 'center',
    color: '#ffffff',
-   animation: ''
+   whiteSpace: 'nowrap',
+   textOverflow: 'ellipsis',
+   overflow: 'hidden'
 }));
 
 
