@@ -1,16 +1,39 @@
-/* @keyframes slidein {
+@keyframes slidein {
    from {
-      transform: rotateX(0deg);
+      transform: translateY(-15%)
    }
 
    to {
-      transform: rotateX(180deg) scaleY(-1);
-      writing-mode: vertical-rl;
+      transform: translateY(0%)
    }
 }
 
 .song-item {
-   animation-duration: 1s;
    animation-name: slidein;
    animation-iteration-count: infinite;
-} */
+   animation-direction: alternate-reverse;
+}
+
+.song-item0 {
+   animation-duration: 0.5s;
+}
+
+.song-item1 {
+   animation-duration: 0.5s;
+   animation-delay: 0.1s;
+}
+
+.song-item2 {
+   animation-duration: 0.5s;
+   animation-delay: 0.2s;
+}
+
+.song-item3 {
+   animation-duration: 0.5s;
+   animation-delay: 0.3s;
+}
+
+.song-item4 {
+   animation-duration: 0.5s;
+   animation-delay: 0.4s;
+}

@@ -28,7 +28,7 @@ function SongsComponent() {
    const [searchValue, setSearchValue] = useState('');
 
    const { arrayRotate } = useArrayRotate(songs, newSongs);
-   const { data: requestResult, refetch, isSuccess, isFetching } = useQuery('getSongs', () => searchSongs(searchValue));
+   const { data: requestResult, refetch, isSuccess } = useQuery('getSongs', () => searchSongs(searchValue));
 
 
    const getSongs = () => {
@@ -79,7 +79,7 @@ function SongsComponent() {
          </Box>
          <Box sx={boxStyles}>
             {songs.map((song, i) => (
-               <Item className='song-item' key={i}>{song?.collectionName}</Item>
+               <Item className={`song-item${i} song-item`} key={i}>{song?.collectionName}</Item>
             ))}
          </Box>
       </Container >
