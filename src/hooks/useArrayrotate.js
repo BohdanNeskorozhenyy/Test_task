@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 
-export const useArrayRotate = (oldArr, newArr) => {
+export const useArrayRotate = (newArr) => {
    const [counter, setCounter] = useState(0);
 
    useEffect(() => {

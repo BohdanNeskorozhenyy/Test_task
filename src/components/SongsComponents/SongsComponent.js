@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import { Box } from '@mui/system';
 import { styled } from '@mui/material/styles';
 import { Button } from '@mui/material';
+import { useRef } from 'react';
 import './index.css'
 
 import Paper from '@mui/material/Paper';
@@ -22,18 +23,23 @@ function SongsComponent() {
    const [newSongs, setNewSongs] = useState([]);
    const [searchValue, setSearchValue] = useState('');
 
-   const { arrayRotate } = useArrayRotate(songs, newSongs);
+   const { arrayRotate } = useArrayRotate(newSongs);
    const { data: requestResult, refetch, isSuccess } = useQuery('getSongs', () => searchSongs(searchValue));
 
 
-   const getSongs = () => {
-      if (searchValue) {
-         refetch();
-      }
-   }
+
+   const timerRef = useRef({ current: null });
 
    const inputHandler = (e) => {
       setSearchValue(e.target.value)
+      setSearchValue(e.target.value)
+      clearTimeout(timerRef.current);
+      timerRef.current = setTimeout(function () {
+         if (searchValue) {
+            refetch();
+         }
+      }
+      )
    }
 
    useEffect(() => {
@@ -49,11 +55,10 @@ function SongsComponent() {
       if (isSuccess) {
          const { results } = requestResult.data;
          const AllCollections = results.map(song => song.collectionName)
-         const noRepeatCollections = [...new Set(AllCollections)]
          if (songs) {
-            setNewSongs(noRepeatCollections.filter((song, i) => i <= 4))
+            setNewSongs(AllCollections.filter((song, i) => i <= 4))
          } else {
-            setSongs(noRepeatCollections.filter((song, i) => i <= 4))
+            setSongs(AllCollections.filter((song, i) => i <= 4))
          }
       }
    }, [requestResult])
@@ -70,7 +75,6 @@ function SongsComponent() {
                <Item className={`song-item${i} song-item`} key={i}>{song}</Item>
             ))}
          </Box>
-         <Button variant='contained' onClick={() => getSongs()}>search</Button>
       </Container >
    );
 }
