@@ -88,6 +88,7 @@ const Item = styled(Paper)(({ theme }) => ({
    whiteSpace: 'nowrap',
    textOverflow: 'ellipsis',
    overflow: 'hidden',
+   borderRadius: '10px',
    boxShadow: 'rgb(38, 57, 77) 0px 20px 30px -10px;'
 }));
 
